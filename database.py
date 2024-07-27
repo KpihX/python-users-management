@@ -1,7 +1,7 @@
 import sqlite3
 import sys
 
-""" Error constants """
+""" Operations results constants """
 
 OPERATION_SUCCESS = 1
 INTEGRITY_ERROR = 0
@@ -29,7 +29,7 @@ def add_user(username)-> bool:
     except sqlite3.IntegrityError:
         return INTEGRITY_ERROR
     except Exception as e:
-        print("!{e}!", file=sys.stderr)
+        print(f"!{e}!", file=sys.stderr)
         return UNKNOWN_ERROR
     finally:
         conn.close()
@@ -55,8 +55,8 @@ def update_user(old_username, new_username)-> None:
             return OPERATION_SUCCESS
     except sqlite3.IntegrityError:
         return INTEGRITY_ERROR
-    except:
-        print("!{e}!", file=sys.stderr)
+    except Exception as e:
+        print(f"!{e}!", file=sys.stderr)
         return UNKNOWN_ERROR
     finally:
         conn.close()
